@@ -311,6 +311,18 @@ namespace CoinAPI.REST.V1 {
             var url = string.Format("/v1/orderbooks/{0}/history?time_start={1}&limit={2}", symbolId, start.ToString(dateFormat), limit);
             return GetData<List<Orderbook>>(url);
         }
+
+        public List<Orderbook3> Orderbooks3_current_data_all_filtered_bitstamp()
+        {
+            var url = "/v1/orderbooks3/current?filter_symbol_id=BITSTAMP";
+            return GetData<List<Orderbook3>>(url);
+        }
+
+        public Orderbook3 Orderbooks3_current_data_symbol(string symbolId)
+        {
+            var url = string.Format("/v1/orderbooks3/{0}/current", symbolId);
+            return GetData<Orderbook3>(url);
+        }
     }
 
 }
