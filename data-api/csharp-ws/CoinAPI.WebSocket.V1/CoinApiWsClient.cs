@@ -81,6 +81,9 @@ namespace CoinAPI.WebSocket.V1
                 case MessageType.book:
                     HandleBookItem(sender, item);
                     break;
+                case MessageType.book_l3:
+                    HandleBookL3Item(sender, item);
+                    break;
                 case MessageType.ohlcv:
                     HandleOHLCVItem(sender, item);
                     break;
@@ -107,6 +110,13 @@ namespace CoinAPI.WebSocket.V1
             var data = JsonSerializer.Deserialize<OrderBook>(item.Data);
             OrderBookEvent?.Invoke(sender, data);
         }
+
+        private void HandleBookL3Item(object sender, MessageData item)
+        {
+            var data = JsonSerializer.Deserialize<OrderBookL3>(item.Data);
+            OrderBookL3Event?.Invoke(sender, data);
+        }
+
 
         private void HandleOHLCVItem(object sender, MessageData item)
         {
@@ -236,6 +246,7 @@ namespace CoinAPI.WebSocket.V1
 
         public event OHLCVEventHandler OHLCVEvent;
         public event OrderBookEventHandler OrderBookEvent;
+        public event OrderBookL3EventHandler OrderBookL3Event;
         public event QuoteEventHandler QuoteEvent;
         public event TradeEventHandler TradeEvent;
         public event VolumeEventHandler VolumeEvent;
