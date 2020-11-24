@@ -19,5 +19,5 @@ public class Reconnect extends MessageBase {
     public OffsetDateTime getBeforeTime() { return beforeTime; }
 
     @JsonAttribute(name = "before_time")
-    public void setBeforeTime(OffsetDateTime beforeTime) {this.beforeTime = beforeTime; }
+    public void setBeforeTime(OffsetDateTime beforeTime) { this.beforeTime = beforeTime; }
 }
