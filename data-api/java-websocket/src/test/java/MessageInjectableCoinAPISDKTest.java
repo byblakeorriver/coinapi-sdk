@@ -21,7 +21,7 @@ public abstract class MessageInjectableCoinAPISDKTest {
         Field messagesQueueField = CoinAPIWebSocketImpl.class.getDeclaredField("messagesQueue");
         messagesQueueField.setAccessible(true);
 
-        coinAPIWebSocket = new CoinAPIWebSocketImpl(false);
+        coinAPIWebSocket = new CoinAPIWebSocketImpl(true);
 
         //inject this public queue into the class
         Queue messagesQueueToSet = new LinkedBlockingDeque();
