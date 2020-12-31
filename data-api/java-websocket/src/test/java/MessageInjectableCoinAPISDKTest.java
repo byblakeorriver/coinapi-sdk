@@ -8,20 +8,20 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public abstract class MessageInjectableCoinAPISDKTest {
-    protected String apiKey;
+    protected String apikey;
     protected CoinAPIWebSocketImpl coinAPIWebSocket;
     protected Queue messagesQueue;
 
     @Before
     public void configuration() throws IOException, NoSuchFieldException, IllegalAccessException {
         Config config = new Config();
-        apiKey = config.getPropValues("coinapi_key");
+        apikey = config.getPropValues("coinapi_key");
 
         //make private messagesQueue variable accessible for injecting messages during testing
         Field messagesQueueField = CoinAPIWebSocketImpl.class.getDeclaredField("messagesQueue");
         messagesQueueField.setAccessible(true);
 
-        coinAPIWebSocket = new CoinAPIWebSocketImpl(true);
+        coinAPIWebSocket = new CoinAPIWebSocketImpl(false);
 
         //inject this public queue into the class
         Queue messagesQueueToSet = new LinkedBlockingDeque();
@@ -32,7 +32,7 @@ public abstract class MessageInjectableCoinAPISDKTest {
 
     public Hello createHello(String type) {
         Hello hello = new Hello();
-        hello.setApiKey(apiKey);
+        hello.setApikey(apikey);
         hello.setSubscribeDataType(new String[]{type});
         return hello;
     }
